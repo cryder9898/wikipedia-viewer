@@ -1,41 +1,30 @@
 $(document).ready(function() {
   "use strict";
   
-  function getTitles(data) {
-    return data[1];
-  }
+  var url = 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&namespace=0&limit=10&origin=*&search=';
 
-  function getExtracts(data) {
-    return data[2];
-  }
-
-  function getURLs(data) {
-    return data[3];
-  }
-
-  function setWikiResults(titles, extracts, urls) {
-    var list = '';
-    for (var i = 0; i < titles.length; i++) {
-      list += '<a href="' + urls[i] + '" target="_blank"><li><h3>' + titles[i] + '</h3>' + extracts[i] + '</li></a>';
-    }
+  function setWikiResults(data) {
+    let list;
+    
+    list = data.map(function (x, i) {
+      let titles = data[1];
+      let extracts = data[2];
+      let urls = data[3];
+      
+      return '<li><a href="' + urls[i] + '" target="_blank"><h3>' + titles[i] + '</h3>' + extracts[i] + '</a></li>';
+    }).join('');
+    
     $('#wikilist').append(list);
   }
 
   $('#searchButton').click(function() {
-    var query = $('#search').val();
-
+    let query = $('#search').val();
     if (query !== '' && typeof query !== 'undefined') {
-      var url = 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&namespace=0&limit=10&origin=*&search=';
-
       $.getJSON(url + encodeURIComponent(query), function(data) {
         $('#wikilist').empty();
-        var titles = getTitles(data);
-        var extracts = getExtracts(data);
-        var urls = getURLs(data);
-        setWikiResults(titles, extracts, urls);
+        setWikiResults(data);
       });
     }
-
   });
   
 });

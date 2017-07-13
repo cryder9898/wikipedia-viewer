@@ -13,11 +13,6 @@ body {
   padding: 10px;
 }
 
-.list {
-  display: table;
-  margin: 0 auto;
-}
-
 ul#wikilist {
   list-style: none;
   padding: 0;

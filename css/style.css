@@ -11,6 +11,9 @@ body {
 .search-area {
   background-color: grey;
   padding: 10px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius 10px;
 }
 
 ul#wikilist {
@@ -30,6 +33,6 @@ a:link, a:visited, a:hover, a:active {
   text-decoration: none;
 }
 
-.container-fluid {
+.container {
   min-height: calc(100vh - 140px);
 }
